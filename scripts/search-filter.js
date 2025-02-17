@@ -5,13 +5,9 @@ const checkAdotados = document.querySelector('#adotados')
 
 document.addEventListener('DOMContentLoaded', (e) =>{
     
-    
     let paginaAtual = 1;
     let searchAdotados = false;
-    
-    
-    
-    
+
     carregarDados().then((lobos) => {
         construirPagina(paginaAtual, lobos)
 
@@ -69,11 +65,15 @@ document.addEventListener('DOMContentLoaded', (e) =>{
 
 async function carregarDados() {
     try {
-        const lobos = localStorage.getItem("lobos");
-        if (!lobos) {
-            throw new Error("Nenhum dado encontrado no localStorage");
+        const lobos =  await fetch('http://localhost:3000/lobos');
+
+        if (!lobos.ok) {
+            throw new Error(`Erro na requisição: ${lobos.status}`);
         }
-        return JSON.parse(lobos); 
+        
+        const resposta = await lobos.json()
+        console.log(resposta)
+        return resposta; 
     } catch (error) {
         console.error("Erro ao carregar JSON:", error);
     }
@@ -121,7 +121,6 @@ function construirPagina(idPagina, dados){
     }
 
     let botoes = document.querySelectorAll('.btn-lobo')
-    console.log(botoes)
     for (let i = 0; i < botoes.length; i++) {
         let idLobo = botoes[i].id.split('-')[1]
 
@@ -136,12 +135,6 @@ function construirPagina(idPagina, dados){
                 localStorage.setItem('loboSelecionado', loboSelecionado)
             })
         }
-
-                // let loboSelecionado = JSON.stringify(lobos[0])
-        // localStorage.setItem('loboSelecionado', loboSelecionado)
-        // console.log(localStorage.getItem('loboSelecionado'))
-        // loboRetornado = JSON.parse(localStorage.getItem('loboSelecionado'))
-        // console.log(loboRetornado)
     }
 
     construirNavButtons(idPagina, dados)
@@ -193,10 +186,6 @@ function construirNavButtons(idPagina, dados){
     
     
         const navItems = navList.children
-        
-        // for (let i = 0; i < navItems.length; i++) {
-        //     console.log(navItems[i].firstChild)
-        // }
 
         const navLinks = document.querySelectorAll('.bottom-nav__link')
 
