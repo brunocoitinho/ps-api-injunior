@@ -1,0 +1,14 @@
+@import 'base/reset.css';
+@import 'base/global.css';
+@import 'base/variables.css';
+
+@import 'components/button.css';
+@import 'components/header.css';
+@import 'components/footer.css';
+@import 'components/card-example.css';
+
+@import 'pages/home.css';
+@import 'pages/adicionar-lobinho.css';
+@import 'pages/adotar_lobinho.css';
+@import 'pages/quem_somos.css';
+@import 'pages/lista-lobinhos.css';

@@ -1,0 +1,137 @@
+.principal_adotar header {
+    display: flex;
+    flex-direction: row;
+    width: 960px;
+    margin-inline: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    gap: 50px;
+}
+
+.foto img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.adotar-lobinho-nome-id {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.adotar-lobinho-nome {
+    font-size: 60px;
+    font-family: "Darker Grotesque"; /*adicionar mais aqui depois */
+    color: black;
+}
+
+.adotar-lobinho-id {
+    font-size: 14px;
+    font-family: "Darker Grotesque"; /*adicionar mais aqui depois */
+    color: black;
+}
+
+.formulario {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.formulario form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulario form div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    height: 84px;
+    gap: 20px;
+}
+
+.formulario form div:last-of-type {
+    display: flex;
+    flex-direction: row;
+    height: 84px;
+}
+
+.titulo {
+    font-size: 30px;
+    font-family: "Darker Grotesque";
+    color: black;
+}
+
+.formulario form input {
+    border: 1px solid #333333;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 20px;
+    font-family: "Darker Grotesque";
+    color: black; 
+    padding-left: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#nome {
+    width: 868px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#nome input {
+    width: 868px;
+}
+
+#idade {
+    width: 72px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#idade input{
+    width: 72px;
+}
+
+#email {
+    width: 960px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.adotar-btn {
+    width: fit-content;
+    margin-block: 50px;
+    align-self: center;
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 48px;
+    padding-bottom: 11px;
+    padding-inline: 58px;
+    background-color: var(--dark-blue);
+    border: 1px solid var(--dark-blue);
+    color: var(--white);
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.adotar-btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.adotar-btn:hover {
+    background-color: var(--white);
+}
+
+.adotar-btn:hover a {
+    color: var(--dark-blue);
+}

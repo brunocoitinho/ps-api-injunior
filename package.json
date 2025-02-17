@@ -1,0 +1,15 @@
+{
+  "name": "ps-api-injunior",
+  "version": "1.0.0",
+  "description": "O projeto consiste no desenvolvimento colaborativo da página \"Adote um Lobinho\", utilizando HTML, CSS e JavaScript. A iniciativa busca criar uma experiência interativa e envolvente, aplicando boas práticas de desenvolvimento web e trabalho em equipe.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
