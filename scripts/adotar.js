@@ -1,17 +1,33 @@
 const adotarBtn = document.querySelector('.adotar-btn');
 const loboSelecionado = JSON.parse(localStorage.getItem('loboSelecionado'))
-let lobinhos = JSON.parse(localStorage.getItem('lobos'))
+//let lobinhos = JSON.parse(localStorage.getItem('lobos'))
 
-adotarBtn.addEventListener('click', ()=>{
-    let index = lobinhos.findIndex(x => x.id == loboSelecionado.id);
+document.addEventListener('DOMContentLoaded', () => {mostrarLobo(loboSelecionado)});
+
+function mostrarLobo(loboSelecionado) {
+    const loboId = loboSelecionado.id
+    const loboNome = loboSelecionado.nome
+    const loboFoto = loboSelecionado.imagem
+
+    let divFoto = document.querySelector(".foto")
+    divFoto.innerHTML = `<img src="${loboFoto}" alt="Foto do Lobo">`
+    let nomeH2 = document.querySelector(".adotar-lobinho-nome")
+    let idP = document.querySelector(".adotar-lobinho-id")
+    nomeH2.innerText = `Adote o(a) ${loboNome}`
+    idP.innerText = `ID: ${loboId}`
+}
+
+adotarBtn.addEventListener('click', async(event)=>{
+    event.preventDefault()
+    let index = loboSelecionado.id
     console.log(index)
-    adotarNovoLobo(index)
+    await adotarNovoLobo(index)
     //localStorage.setItem("lobos", JSON.stringify(lobinhos))
-    //window.location.replace("lista-de-lobinhos.html");
+    window.location.replace("lista-de-lobinhos.html");
 })
 
 
-function adotarNovoLobo(loboIndex) {
+async function adotarNovoLobo(loboIndex) {
 
     let id = loboIndex
     let _nomeDono = document.querySelector('#nome-dono');
@@ -25,22 +41,20 @@ function adotarNovoLobo(loboIndex) {
         adotado: true
     }
 
-    alterarStatus(patch, id)
+    await alterarStatus(patch, id)
 }
 
 
 async function alterarStatus(patch, id) {
     try {
-        const resposta = await fetch(`https://localhost:3000/lobos/${id}`, {
+        const resposta = await fetch(`http://localhost:3000/lobos/${id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(patch),
         })
-        if (!resposta.ok) {
-            throw new Error(`Erro: ${resposta.status}`);
-        }
+        
         const dados = await resposta.json()
         console.log(dados)
 
@@ -48,3 +62,6 @@ async function alterarStatus(patch, id) {
         console.log(error.message)
     }
 }
+
+
+
