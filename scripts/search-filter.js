@@ -66,21 +66,7 @@ document.addEventListener('DOMContentLoaded', (e) =>{
 
 })
 
-// async function carregarDados() {
-//     try {
-//         const lobos =  await fetch('http://localhost:3000/lobos');
 
-//         if (!lobos.ok) {
-//             throw new Error(`Erro na requisição: ${lobos.status}`);
-//         }
-        
-//         const resposta = await lobos.json()
-//         console.log(resposta)
-//         return resposta; 
-//     } catch (error) {
-//         console.error("Erro ao carregar JSON:", error);
-//     }
-// }
 
 
 function construirPagina(idPagina, dados){
