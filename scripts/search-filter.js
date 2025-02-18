@@ -4,11 +4,11 @@ import carregarDados from '../script.js'
 const navList = document.querySelector('.bottom-nav__list')
 const searchBar = document.querySelector('#searchName')
 const checkAdotados = document.querySelector('#adotados')
+let paginaAtual = 1;
 
 
 document.addEventListener('DOMContentLoaded', (e) =>{
     
-    let paginaAtual = 1;
     let searchAdotados = false;
 
     carregarDados().then((lobos) => {
