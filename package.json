@@ -4,7 +4,8 @@
   "description": "O projeto consiste no desenvolvimento colaborativo da página \"Adote um Lobinho\", utilizando HTML, CSS e JavaScript. A iniciativa busca criar uma experiência interativa e envolvente, aplicando boas práticas de desenvolvimento web e trabalho em equipe.",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npx json-server --watch lobinhos.json --port 3000"
   },
   "keywords": [],
   "author": "",
