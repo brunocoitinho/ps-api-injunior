@@ -1,32 +1,17 @@
-async function inicializarLocalStorage() {
+export default async function carregarDados() {
     try {
-        const response = await fetch("lobinhos.json");
-        if (!response.ok) {
-            throw new Error(
-                `Erro ao buscar lobinho.json: ${response.statusText}`
-            );
-        }
-        const lobos = await response.json();
-        localStorage.setItem("lobos", JSON.stringify(lobos));
-        console.log("Lobos inicializados no localStorage");
-    } catch (error) {
-        console.error("Erro ao inicializar o localStorage:", error);
-    } finally {
-        console.log("Tentativa de inicialização do localStorage concluída");
-    }
-}
+        const lobos =  await fetch('http://localhost:3000/lobos');
 
-if (!localStorage.getItem("lobos")) {
-    inicializarLocalStorage()
-        .then(() => {
-            console.log("Inicialização do localStorage concluída");
-        })
-        .catch((error) => {
-            console.error(
-                "Erro durante a inicialização do localStorage:",
-                error
-            );
-        });
+        if (!lobos.ok) {
+            throw new Error(`Erro na requisição: ${lobos.status}`);
+        }
+        
+        const resposta = await lobos.json()
+        console.log(resposta)
+        return resposta; 
+    } catch (error) {
+        console.error("Erro ao carregar JSON:", error);
+    }
 }
 
 // Definição de classes para alteração do status do programa
@@ -139,75 +124,58 @@ function renderizarLobo(nome, idade, descricao, imagem, statusAdocao) {
     container.appendChild(cardExample);
 }
 // Funções para lidar com eventos
-function adicionaNovoLobo(event) {
-    event.preventDefault();
-    const nameInput = document.querySelector("#name");
-    const ageInput = document.querySelector("#age");
-    const linkInput = document.querySelector("#link");
-    const descriptionInput = document.querySelector("#description");
-    const name = nameInput.value.trim();
-    const age = parseInt(ageInput.value.trim(), 10);
-    const link = linkInput.value.trim();
-    const description = descriptionInput.value.trim();
-    // Validações
-    if (!name) {
-        alert("O nome não pode estar vazio.");
-        return;
-    }
-    if (isNaN(age) || age <= 0) {
-        alert("A idade deve ser um número válido e maior que zero.");
-        return;
-    }
-    if (!link) {
-        alert("O link da foto não deve estar vazio.");
-        return;
-    }
-    if (!description) {
-        alert("A descrição não pode estar vazia.");
-        return;
-    }
-    // Criando o objeto Lobinho caso os dados sejam válidos
-    const lobinho = new Lobinho(name, age, description, link);
-    console.log(lobinho);
-    lobinhos.adicionarLobinho(lobinho);
+// function adicionaNovoLobo(event) {
+//     event.preventDefault();
+//     const nameInput = document.querySelector("#name");
+//     const ageInput = document.querySelector("#age");
+//     const linkInput = document.querySelector("#link");
+//     const descriptionInput = document.querySelector("#description");
+//     const name = nameInput.value.trim();
+//     const age = parseInt(ageInput.value.trim(), 10);
+//     const link = linkInput.value.trim();
+//     const description = descriptionInput.value.trim();
+//     // Validações
+//     if (!name) {
+//         alert("O nome não pode estar vazio.");
+//         return;
+//     }
+//     if (isNaN(age) || age <= 0) {
+//         alert("A idade deve ser um número válido e maior que zero.");
+//         return;
+//     }
+//     if (!link) {
+//         alert("O link da foto não deve estar vazio.");
+//         return;
+//     }
+//     if (!description) {
+//         alert("A descrição não pode estar vazia.");
+//         return;
+//     }
+//     // Criando o objeto Lobinho caso os dados sejam válidos
+//     const lobinho = new Lobinho(name, age, description, link);
+//     console.log(lobinho);
+//     lobinhos.adicionarLobinho(lobinho);
 
-    // Exibe mensagem de sucesso
-    alert(`Lobinho "${name}" adicionado com sucesso! 🐺`);
-    console.log(lobinhos);
-    // Limpa os campos do formulário
-    nameInput.value = "";
-    ageInput.value = "";
-    linkInput.value = "";
-    descriptionInput.value = "";
-}
+//     // Exibe mensagem de sucesso
+//     alert(`Lobinho "${name}" adicionado com sucesso! 🐺`);
+//     console.log(lobinhos);
+//     // Limpa os campos do formulário
+//     nameInput.value = "";
+//     ageInput.value = "";
+//     linkInput.value = "";
+//     descriptionInput.value = "";
+// }
 
-const saveBtn = document.querySelector(".save-btn");
-try {
-    if (saveBtn == null) {
-        throw new Error("Botão de Salvar não encontrado");
-    }
-    saveBtn.addEventListener("click", (e) => {
-        adicionaNovoLobo(e);
-        localStorage.setItem("lobos", JSON.stringify(lobinhos.state))
-    })
-} catch (error) {
-    console.log(error);
-}
+// const saveBtn = document.querySelector(".save-btn");
+// try {
+//     if (saveBtn == null) {
+//         throw new Error("Botão de Salvar não encontrado");
+//     }
+//     saveBtn.addEventListener("click", (e) => {
+//         adicionaNovoLobo(e);
+//         localStorage.setItem("lobos", JSON.stringify(lobinhos.state))
+//     })
+// } catch (error) {
+//     console.log(error);
+// }
 
-
-// function mostrarLobo (loboSelecionado) {
-// //     let loboSelect = JSON.parse(loboSelecionado)
-// //     let loboId = loboSelect.id
-// //     let loboNome = loboSelect.nome
-// //     let loboFoto = loboSelect.imagem
-
-// //     let divFoto = document.querySelector(".foto")
-// //     const foto = document.createElement("img")
-// //     img.src = loboFoto
-// //     img.alt = fotoLobo
-// //     divFoto.appendChild(img);
-// //     let nomeH2 = document.querySelector(".adotar-lobinho-nome")
-// //     let idP = document.querySelector(".adotar-lobinho-id")
-// //     nomeH2.innerText = `Adote o(a) ${loboNome}`
-// //     idP.innerText = `ID: ${loboId}`
-// // }

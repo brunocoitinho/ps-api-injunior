@@ -1,21 +1,23 @@
+import carregarDados from '../script.js'
+
 const loboSelecionado = JSON.parse(localStorage.getItem('loboSelecionado'))
 const showSection = document.querySelector('.visualiza-lobo')
-const listaLobo = JSON.parse(localStorage.getItem('lobos'))
-
-console.log(listaLobo)
 
 try{
     if(loboSelecionado == null){
         throw new Error(`Erro ao buscar loboSelecionado`);
     }
 
-    if(listaLobo == null){
-        throw new Error(`Erro ao buscar a lista de Lobos`);
-    }
-    carregarLobo(loboSelecionado)
+    carregarDados().then((listaLobo) => {
+
+        if(listaLobo == null){
+            throw new Error(`Erro ao buscar a lista de Lobos`);
+        }
+        carregarLobo(loboSelecionado)
+    });
 
 }catch(error){
-    console.error('Erro ao acessar dado no localStorage:', error);
+    console.error('Erro ao acessar dado:', error);
     alert('Erro 4Au4: Lobo não encontrado')
     window.location.replace("lista-de-lobinhos.html");
 }
@@ -48,28 +50,27 @@ function carregarLobo(lobo){
     const btnTrash = document.querySelector('.button--exclusao')
     btnTrash.addEventListener('click', (e)=>{
         e.preventDefault()
-        let novaLista = excluirLobo(lobo)
-        console.log(novaLista)
-        localStorage.setItem('lobos', JSON.stringify(novaLista))
-        alert('Lobo excluído');
-        window.location.replace("lista-de-lobinhos.html");
+        excluirLobo(lobo)
+        setTimeout(() => {
+            console.log('Redirecionando para lista-de-lobinhos.html');
+            window.location.replace("lista-de-lobinhos.html");
+        }, 100);
+        
     })
 
 }
 
-function excluirLobo(loboAExcluir){
-    if (!Array.isArray(listaLobo)) {
-        console.error("Erro: listaLobo não é um array válido.");
-        return [];
+async function excluirLobo(loboAExcluir){
+    try {
+        const response = await fetch(`http://localhost:3000/lobos/${loboAExcluir.id}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok){ 
+            throw new Error(`Erro: ${response.status}`)
+        }else{
+            alert(`Lobo ${loboAExcluir.nome} excluído com sucesso.`);
+        }
+    } catch (error) {
+        console.error('Erro ao excluir dados:', error);
     }
-
-    let index = listaLobo.findIndex(x => x.id == loboAExcluir.id);
-    
-    if (index === -1) {
-        console.error("Erro: Lobo não encontrado na lista.");
-        return listaLobo;
-    }
-
-    listaLobo.splice(index, 1);
-    return listaLobo;
 }
