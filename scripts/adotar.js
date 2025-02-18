@@ -1,6 +1,6 @@
 const adotarBtn = document.querySelector('.adotar-btn');
 const loboSelecionado = JSON.parse(localStorage.getItem('loboSelecionado'))
-//let lobinhos = JSON.parse(localStorage.getItem('lobos'))
+
 
 document.addEventListener('DOMContentLoaded', () => {mostrarLobo(loboSelecionado)});
 
@@ -22,7 +22,6 @@ adotarBtn.addEventListener('click', async(event)=>{
     let index = loboSelecionado.id
     console.log(index)
     await adotarNovoLobo(index)
-    //localStorage.setItem("lobos", JSON.stringify(lobinhos))
     window.location.replace("lista-de-lobinhos.html");
 })
 
