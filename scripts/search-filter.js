@@ -1,3 +1,6 @@
+import carregarDados from '../script.js'
+
+
 const navList = document.querySelector('.bottom-nav__list')
 const searchBar = document.querySelector('#searchName')
 const checkAdotados = document.querySelector('#adotados')
@@ -63,21 +66,21 @@ document.addEventListener('DOMContentLoaded', (e) =>{
 
 })
 
-async function carregarDados() {
-    try {
-        const lobos =  await fetch('http://localhost:3000/lobos');
+// async function carregarDados() {
+//     try {
+//         const lobos =  await fetch('http://localhost:3000/lobos');
 
-        if (!lobos.ok) {
-            throw new Error(`Erro na requisição: ${lobos.status}`);
-        }
+//         if (!lobos.ok) {
+//             throw new Error(`Erro na requisição: ${lobos.status}`);
+//         }
         
-        const resposta = await lobos.json()
-        console.log(resposta)
-        return resposta; 
-    } catch (error) {
-        console.error("Erro ao carregar JSON:", error);
-    }
-}
+//         const resposta = await lobos.json()
+//         console.log(resposta)
+//         return resposta; 
+//     } catch (error) {
+//         console.error("Erro ao carregar JSON:", error);
+//     }
+// }
 
 
 function construirPagina(idPagina, dados){
@@ -228,4 +231,3 @@ function construirNavButtons(idPagina, dados){
     
     }
 }
-

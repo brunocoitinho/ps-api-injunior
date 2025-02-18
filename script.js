@@ -1,33 +1,18 @@
-// async function inicializarLocalStorage() {
-//     try {
-//         const response = await fetch("lobinhos.json");
-//         if (!response.ok) {
-//             throw new Error(
-//                 `Erro ao buscar lobinho.json: ${response.statusText}`
-//             );
-//         }
-//         const lobos = await response.json();
-//         localStorage.setItem("lobos", JSON.stringify(lobos));
-//         console.log("Lobos inicializados no localStorage");
-//     } catch (error) {
-//         console.error("Erro ao inicializar o localStorage:", error);
-//     } finally {
-//         console.log("Tentativa de inicialização do localStorage concluída");
-//     }
-// }
+export default async function carregarDados() {
+    try {
+        const lobos =  await fetch('http://localhost:3000/lobos');
 
-// if (!localStorage.getItem("lobos")) {
-//     inicializarLocalStorage()
-//         .then(() => {
-//             console.log("Inicialização do localStorage concluída");
-//         })
-//         .catch((error) => {
-//             console.error(
-//                 "Erro durante a inicialização do localStorage:",
-//                 error
-//             );
-//         });
-// }
+        if (!lobos.ok) {
+            throw new Error(`Erro na requisição: ${lobos.status}`);
+        }
+        
+        const resposta = await lobos.json()
+        console.log(resposta)
+        return resposta; 
+    } catch (error) {
+        console.error("Erro ao carregar JSON:", error);
+    }
+}
 
 // Definição de classes para alteração do status do programa
 
@@ -194,20 +179,3 @@ try {
     console.log(error);
 }
 
-
-// function mostrarLobo (loboSelecionado) {
-// //     let loboSelect = JSON.parse(loboSelecionado)
-// //     let loboId = loboSelect.id
-// //     let loboNome = loboSelect.nome
-// //     let loboFoto = loboSelect.imagem
-
-// //     let divFoto = document.querySelector(".foto")
-// //     const foto = document.createElement("img")
-// //     img.src = loboFoto
-// //     img.alt = fotoLobo
-// //     divFoto.appendChild(img);
-// //     let nomeH2 = document.querySelector(".adotar-lobinho-nome")
-// //     let idP = document.querySelector(".adotar-lobinho-id")
-// //     nomeH2.innerText = `Adote o(a) ${loboNome}`
-// //     idP.innerText = `ID: ${loboId}`
-// // }
